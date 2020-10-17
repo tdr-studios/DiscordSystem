@@ -20,4 +20,12 @@ public interface Permission {
             }else return false;
         };
     }
+
+    static Permission guildPermission(net.dv8tion.jda.api.Permission permission) {
+        return sender -> {
+            if (sender instanceof GuildDiscordCommandSender) {
+                return ((GuildDiscordCommandSender) sender).getMember().getPermissions().stream().anyMatch(p -> permission == p);
+            }else return false;
+        };
+    }
 }

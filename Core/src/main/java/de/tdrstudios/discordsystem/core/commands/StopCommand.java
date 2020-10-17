@@ -17,6 +17,7 @@ public class StopCommand extends Command {
     public void onRegister() {
         addAlias("exit");
         addAlias("shutdown");
+        setDescription("Shutdown the command");
     }
 
     @Override

@@ -4,6 +4,8 @@ import de.tdrstudios.discordsystem.api.Discord;
 import de.tdrstudios.discordsystem.api.services.CreateService;
 import de.tdrstudios.discordsystem.api.services.Service;
 
+import java.util.Collection;
+
 /**
  * CommandService is responsible for execute and process commands.
  * @author DSeeLP
@@ -36,4 +38,10 @@ public interface CommandService extends Service {
      * @see Discord#scanCommands(String)
      */
     void registerCommand(Command command, CreateCommand annotation);
+
+    /**
+     * This method returns all registered commands.
+     * @return all registered commands
+     */
+    Collection<Command> getCommands();
 }

@@ -7,10 +7,12 @@ import com.google.inject.Singleton;
 import de.tdrstudios.discordsystem.api.Discord;
 import de.tdrstudios.discordsystem.api.commands.*;
 import de.tdrstudios.discordsystem.api.event.EventService;
+import de.tdrstudios.discordsystem.api.event.events.internal.CommandRegisterEvent;
 import de.tdrstudios.discordsystem.utils.Criteria;
 import de.tdrstudios.discordsystem.utils.ReflectionUtils;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 
@@ -71,8 +73,13 @@ public class CoreCommandService implements CommandService {
         int count = 0;
         for (Class<?> clazz : ReflectionUtils.filter(packageString, Criteria.annotatedWith(CreateCommand.class), Criteria.subclassOf(Command.class))) {
             Command command = (Command) Discord.getInstance(clazz);
+            CreateCommand annotation = clazz.getAnnotation(CreateCommand.class);
+            command.setName(annotation.name());
+            command.setExecutorType(annotation.executorType());
             command.onRegister();
-            registerCommand(command, clazz.getAnnotation(CreateCommand.class));
+            command.setName(annotation.name());
+            command.setExecutorType(annotation.executorType());
+            registerCommand(command, annotation);
             eventService.scanForEvents(clazz);
             count++;
         }
@@ -93,6 +100,12 @@ public class CoreCommandService implements CommandService {
             }
         }
         commands.put(command, annotation);
+        Discord.getInstance(ExecutorService.class).execute(()->Discord.getInstance(EventService.class).callEvent(new CommandRegisterEvent(command, annotation)));
+    }
+
+    @Override
+    public Collection<Command> getCommands() {
+        return commands.keySet();
     }
 
     @Override

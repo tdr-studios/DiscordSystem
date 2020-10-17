@@ -51,7 +51,8 @@ public class Discord implements Service {
         config.addDefault("bot.token", "Enter token here!");
         config.addDefault("bot.activity.activity", "https://github.com/tdr-studios");
         config.addDefault("bot.activity.action", "DEFAULT");
-        config.addDefault("bot.activity.status", "DEFAULT");
+        config.addDefault("bot.activity.status", "ONLINE");
+        config.addDefault("prefix", "+");
         config.save();
     }
 
@@ -107,6 +108,17 @@ public class Discord implements Service {
         void shutdown();
         String getVersion();
         String getVersionNickname();
+    }
+
+    public static String getDefaultPrefix() {
+        return config.getString("prefix");
+    }
+
+    public static String getPrefix(long guildId) {
+        JsonDocument guildData = Discord.getInstance(DataService.class).getGuildData(guildId);
+        if (guildData.has("prefix")) {
+            return guildData.getString("prefix");
+        }else return getDefaultPrefix();
     }
 
 }

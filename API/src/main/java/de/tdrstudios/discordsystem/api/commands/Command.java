@@ -11,8 +11,32 @@ import java.util.List;
  */
 public abstract class Command {
     private List<String> aliases = new ArrayList<>();
-    private String description;
-    private String permission;
+
+    public String getDescription() {
+        return description;
+    }
+
+    private String description = "This is the default description";
+
+    public String getName() {
+        return name;
+    }
+
+    private String name;
+
+    public ExecutorType getExecutorType() {
+        return executorType;
+    }
+
+    public void setExecutorType(ExecutorType executorType) {
+        this.executorType = executorType;
+    }
+
+    private ExecutorType executorType;
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     private String[] cachedAliases = {};
 
@@ -22,10 +46,6 @@ public abstract class Command {
     public void addAlias(String alias) {
         aliases.add(alias);
         updateAliasCache();
-    }
-
-    public void permission(String permission) {
-
     }
 
     private void updateAliasCache() {

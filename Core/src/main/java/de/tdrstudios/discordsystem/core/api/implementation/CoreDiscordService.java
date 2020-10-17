@@ -2,6 +2,7 @@ package de.tdrstudios.discordsystem.core.api.implementation;
 
 import com.google.inject.Singleton;
 import de.tdrstudios.discordsystem.api.Discord;
+import de.tdrstudios.discordsystem.api.event.EventService;
 import de.tdrstudios.discordsystem.api.event.events.discord.ListenerAdapter;
 import de.tdrstudios.discordsystem.api.DiscordService;
 import de.tdrstudios.discordsystem.api.event.EventHandler;
@@ -37,9 +38,14 @@ public class CoreDiscordService implements DiscordService {
         try {
             shardManager = DefaultShardManagerBuilder.createDefault(config.getString("bot.token")).build();
             shardManager.addEventListener(Discord.getInstance(ListenerAdapter.class));
+            for (JDA shard : shardManager.getShards()) {
+                shard.awaitReady();
+            }
         } catch (LoginException | CompletionException e) {
             System.err.println("Failed to start the DiscordAPI! "+e.getCause().getMessage());
             Discord.shutdown();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
         shardManager.setStatus(OnlineStatus.valueOf(config.getString("bot.activity.status").toUpperCase()));
         shardManager.setActivity(Activity.of(Activity.ActivityType.valueOf(config.getString("bot.activity.action").toUpperCase()), config.getString("bot.activity.activity")));
@@ -53,12 +59,12 @@ public class CoreDiscordService implements DiscordService {
 
     @Override
     public void initialize() throws Exception {
-
+        Discord.getInstance(EventService.class).scanForEvents(this.getClass());
     }
 
     @EventHandler
     public void onJdaReady(ReadyEvent event) {
         JDA.ShardInfo shardInfo = event.getJDA().getShardInfo();
-        System.out.println("Shard "+shardInfo.getShardId()+"/"+shardInfo.getShardTotal()+" started successfully!");
+        System.out.println("Shard "+shardInfo.getShardId()+"/"+shardInfo.getShardTotal()+" is now ready");
     }
 }
