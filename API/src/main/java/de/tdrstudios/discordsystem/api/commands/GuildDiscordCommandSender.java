@@ -45,6 +45,11 @@ public class GuildDiscordCommandSender implements CommandSender {
         return event.getChannel().sendMessage(message);
     }
 
+    @Override
+    public boolean hasPermission(Permission permission) {
+        return permission.check(this);
+    }
+
     public User getAuthor() {
         return event.getAuthor();
     }
@@ -55,5 +60,9 @@ public class GuildDiscordCommandSender implements CommandSender {
 
     public Guild getGuild() {
         return event.getGuild();
+    }
+
+    public Member getMember() {
+        return event.getMember();
     }
 }

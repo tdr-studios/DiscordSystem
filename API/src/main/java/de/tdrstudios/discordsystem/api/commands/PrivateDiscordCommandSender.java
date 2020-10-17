@@ -45,6 +45,11 @@ public class PrivateDiscordCommandSender implements CommandSender{
         return event.getChannel().sendMessage(message);
     }
 
+    @Override
+    public boolean hasPermission(Permission permission) {
+        return permission.check(this);
+    }
+
     public User getAuthor() {
         return event.getAuthor();
     }

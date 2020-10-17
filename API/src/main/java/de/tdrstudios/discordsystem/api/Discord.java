@@ -48,14 +48,10 @@ public class Discord implements Service {
         File file = new File("config.json");
         if (!file.exists()) file.createNewFile();
         config = JsonConfig.load(file);
-        JsonDocument botData = new JsonDocument();
-        botData.add("token", "Enter token here!");
-        JsonDocument botStatus = new JsonDocument();
-        botStatus.add("activity", "https://github.com/tdr-studios");
-        botStatus.add("action", "DEFAULT");
-        botStatus.add("status", "ONLINE");
-        botData.addDocument("activity", botStatus);
-        config.addDefault("bot", botData);
+        config.addDefault("bot.token", "Enter token here!");
+        config.addDefault("bot.activity.activity", "https://github.com/tdr-studios");
+        config.addDefault("bot.activity.action", "DEFAULT");
+        config.addDefault("bot.activity.status", "DEFAULT");
         config.save();
     }
 

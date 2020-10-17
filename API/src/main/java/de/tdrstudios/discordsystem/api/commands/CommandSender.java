@@ -15,4 +15,6 @@ public interface CommandSender {
     RestAction<Message> sendMessage(MessageEmbed embed);
     RestAction<Message> sendMessage(EmbedBuilder embedBuilder);
     RestAction<Message> sendMessage(Message message);
+
+    boolean hasPermission(Permission permission);
 }

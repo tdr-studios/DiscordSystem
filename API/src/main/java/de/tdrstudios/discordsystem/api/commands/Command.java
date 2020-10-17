@@ -1,5 +1,7 @@
 package de.tdrstudios.discordsystem.api.commands;
 
+import de.dseelp.database.api.storage.StringStorage;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +12,7 @@ import java.util.List;
 public abstract class Command {
     private List<String> aliases = new ArrayList<>();
     private String description;
+    private String permission;
 
     private String[] cachedAliases = {};
 
@@ -19,6 +22,10 @@ public abstract class Command {
     public void addAlias(String alias) {
         aliases.add(alias);
         updateAliasCache();
+    }
+
+    public void permission(String permission) {
+
     }
 
     private void updateAliasCache() {

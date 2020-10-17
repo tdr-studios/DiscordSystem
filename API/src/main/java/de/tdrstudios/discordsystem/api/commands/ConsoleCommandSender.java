@@ -34,4 +34,9 @@ public class ConsoleCommandSender implements CommandSender {
     public RestAction<Message> sendMessage(Message message) {
         throw new UnsupportedOperationException("This method is only supported in Discord commandsenders");
     }
+
+    @Override
+    public boolean hasPermission(Permission permission) {
+        return true;
+    }
 }
