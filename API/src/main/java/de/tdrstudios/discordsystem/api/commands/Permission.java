@@ -28,4 +28,14 @@ public interface Permission {
             }else return false;
         };
     }
+
+    static Permission userIdPermission(long userId) {
+        return sender -> {
+            if (sender instanceof GuildDiscordCommandSender) {
+                return ((GuildDiscordCommandSender) sender).getAuthor().getIdLong() == userId;
+            } else if (sender instanceof PrivateDiscordCommandSender) {
+                return ((PrivateDiscordCommandSender) sender).getAuthor().getIdLong() == userId;
+            }else return sender instanceof ConsoleCommandSender;
+        };
+    }
 }
