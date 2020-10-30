@@ -28,4 +28,7 @@ public interface ModuleService extends Service {
     ClassLoader[] getClassLoaders();
 
     void startModules();
+
+    void callAction(ModuleAction action);
+    void callAction(Module module, ModuleAction action);
 }

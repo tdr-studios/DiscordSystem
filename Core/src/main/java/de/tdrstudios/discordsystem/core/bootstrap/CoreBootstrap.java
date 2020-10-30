@@ -9,9 +9,11 @@ import de.tdrstudios.discordsystem.api.commands.CommandService;
 import de.tdrstudios.discordsystem.api.DiscordService;
 import de.tdrstudios.discordsystem.api.event.EventService;
 import de.tdrstudios.discordsystem.api.modules.ModuleService;
+import de.tdrstudios.discordsystem.api.sound.SoundService;
 import de.tdrstudios.discordsystem.console.Console;
 import de.tdrstudios.discordsystem.console.LogSystem;
 import de.tdrstudios.discordsystem.core.api.implementation.*;
+import de.tdrstudios.discordsystem.core.api.implementation.sound.CoreSoundService;
 import de.tdrstudios.discordsystem.core.system.CoreSystem;
 import lombok.Getter;
 
@@ -40,6 +42,8 @@ public class CoreBootstrap {
                 bind(ModuleService.class).to(CoreModuleService.class);
                 bind(DataService.class).to(CoreDataService.class);
                 bind(EventService.class).to(CoreEventService.class);
+                bind(SoundService.class).to(CoreSoundService.class);
+                bind(ModuleDownloadService.class).to(CoreModuleDownloadService.class);
             }
         });
         Console console = injector.getInstance(Console.class);

@@ -4,14 +4,14 @@ import com.google.inject.Injector;
 import de.tdrstudios.discordsystem.api.commands.CommandService;
 import de.tdrstudios.discordsystem.api.event.EventService;
 import de.tdrstudios.discordsystem.api.event.HandleEvents;
+import de.tdrstudios.discordsystem.api.services.ComparableService;
 import de.tdrstudios.discordsystem.api.services.CreateService;
 import de.tdrstudios.discordsystem.api.services.Service;
-import de.tdrstudios.discordsystem.utils.Criteria;
+import de.tdrstudios.discordsystem.utils.ClassCriteria;
 import de.tdrstudios.discordsystem.utils.JsonConfig;
 import de.tdrstudios.discordsystem.utils.JsonDocument;
 import de.tdrstudios.discordsystem.utils.ReflectionUtils;
 import lombok.Getter;
-import org.apache.maven.artifact.versioning.DefaultArtifactVersion;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,7 +21,7 @@ import java.util.*;
  * @author DSeeLP
  * @since 0.1-ALPHA
  */
-@CreateService
+@CreateService(Integer.MAX_VALUE)
 public class Discord implements Service {
     public static void setInjector(Injector injector) {
         if (Discord.injector != null) throw new UnsupportedOperationException("Discord.injector already has a value!");
@@ -62,13 +62,16 @@ public class Discord implements Service {
         EventService eventService = injector.getInstance(EventService.class);
         List<Service> services = new ArrayList<>();
         int count = 0;
-        for (Class<?> clazz : ReflectionUtils.filter(packageString, Criteria.annotatedWith(CreateService.class), Criteria.subclassOf(Service.class))) {
+        for (Class<?> clazz : ReflectionUtils.filter(packageString, ClassCriteria.annotatedWith(CreateService.class), ClassCriteria.subclassOf(Service.class))) {
             services.add((Service) getInstance(clazz));
             eventService.scanForEvents(clazz);
             count++;
         }
         System.out.println("Found "+count+" Services in "+ Arrays.toString(packageString) +"!");
-        for (Service service : services) {
+        for (int i = 0; i < services.size(); i++) {
+
+        }
+        for (Service service : ComparableService.sort(services)) {
             try {
                 service.initialize();
             } catch (Exception e) {
@@ -81,7 +84,7 @@ public class Discord implements Service {
         System.out.println("Scanning "+ Arrays.toString(packageString) +" for EventHandlers...");
         EventService eventService = injector.getInstance(EventService.class);
         int count = 0;
-        for (Class<?> clazz : ReflectionUtils.filter(packageString, Criteria.annotatedWith(HandleEvents.class))) {
+        for (Class<?> clazz : ReflectionUtils.filter(packageString, ClassCriteria.annotatedWith(HandleEvents.class))) {
             eventService.scanForEvents(clazz);
             count++;
         }
@@ -104,7 +107,6 @@ public class Discord implements Service {
         getInstance(DiscordImpl.class).shutdown();
     }
 
-    @CreateService
     public static interface DiscordImpl extends Service {
         void shutdown();
         String getVersion();

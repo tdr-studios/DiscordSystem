@@ -8,7 +8,10 @@ import de.tdrstudios.discordsystem.api.Discord;
 import de.tdrstudios.discordsystem.api.commands.*;
 import de.tdrstudios.discordsystem.api.event.EventService;
 import de.tdrstudios.discordsystem.api.event.events.internal.CommandRegisterEvent;
-import de.tdrstudios.discordsystem.utils.Criteria;
+import de.tdrstudios.discordsystem.api.modules.ModuleAction;
+import de.tdrstudios.discordsystem.api.modules.ModuleService;
+import de.tdrstudios.discordsystem.api.services.CreateService;
+import de.tdrstudios.discordsystem.utils.ClassCriteria;
 import de.tdrstudios.discordsystem.utils.ReflectionUtils;
 
 import java.util.Arrays;
@@ -21,6 +24,7 @@ import java.util.concurrent.ExecutorService;
  * @since 0.1-ALPHA
  */
 @Singleton
+@CreateService
 public class CoreCommandService implements CommandService {
     private BiMap<Command, CreateCommand> commands = HashBiMap.create();
     @Inject
@@ -71,7 +75,7 @@ public class CoreCommandService implements CommandService {
         System.out.println("Scanning "+ Arrays.toString(packageString) +" for Commands...");
         EventService eventService = Discord.getInstance(EventService.class);
         int count = 0;
-        for (Class<?> clazz : ReflectionUtils.filter(packageString, Criteria.annotatedWith(CreateCommand.class), Criteria.subclassOf(Command.class))) {
+        for (Class<?> clazz : ReflectionUtils.filter(packageString, ClassCriteria.annotatedWith(CreateCommand.class), ClassCriteria.subclassOf(Command.class))) {
             Command command = (Command) Discord.getInstance(clazz);
             CreateCommand annotation = clazz.getAnnotation(CreateCommand.class);
             command.setName(annotation.name());
@@ -110,6 +114,6 @@ public class CoreCommandService implements CommandService {
 
     @Override
     public void initialize() throws Exception {
-
+        Discord.getInstance(ModuleService.class).callAction(ModuleAction.COMMAND_READY);
     }
 }

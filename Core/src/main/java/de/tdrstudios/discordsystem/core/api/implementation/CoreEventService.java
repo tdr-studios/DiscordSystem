@@ -3,9 +3,13 @@ package de.tdrstudios.discordsystem.core.api.implementation;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Singleton;
+import de.tdrstudios.discordsystem.api.Discord;
 import de.tdrstudios.discordsystem.api.event.Event;
 import de.tdrstudios.discordsystem.api.event.EventHandler;
 import de.tdrstudios.discordsystem.api.event.EventService;
+import de.tdrstudios.discordsystem.api.modules.ModuleAction;
+import de.tdrstudios.discordsystem.api.modules.ModuleService;
+import de.tdrstudios.discordsystem.api.services.CreateService;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -18,6 +22,7 @@ import java.util.List;
  * @since 0.1-ALPHA
  */
 @Singleton
+@CreateService
 public class CoreEventService implements EventService {
     private final Injector injector;
     private HashMap<Class<?>, List<Method>> methodRegistry = new HashMap<>();
@@ -113,6 +118,6 @@ public class CoreEventService implements EventService {
 
     @Override
     public void initialize() throws Exception {
-
+        Discord.getInstance(ModuleService.class).callAction(ModuleAction.EVENT_READY);
     }
 }

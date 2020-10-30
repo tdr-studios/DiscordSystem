@@ -6,6 +6,9 @@ import de.tdrstudios.discordsystem.api.event.EventService;
 import de.tdrstudios.discordsystem.api.event.events.discord.ListenerAdapter;
 import de.tdrstudios.discordsystem.api.DiscordService;
 import de.tdrstudios.discordsystem.api.event.EventHandler;
+import de.tdrstudios.discordsystem.api.modules.ModuleAction;
+import de.tdrstudios.discordsystem.api.modules.ModuleService;
+import de.tdrstudios.discordsystem.api.services.CreateService;
 import de.tdrstudios.discordsystem.utils.JsonConfig;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.OnlineStatus;
@@ -16,12 +19,15 @@ import net.dv8tion.jda.api.sharding.ShardManager;
 
 import javax.security.auth.login.LoginException;
 import java.util.concurrent.CompletionException;
+import java.util.concurrent.TimeUnit;
+import java.util.function.IntFunction;
 
 /**
  * @author DSeeLP
  * @since 0.1-ALPHA
  */
 @Singleton
+@CreateService(1)
 public class CoreDiscordService implements DiscordService {
 
     private ShardManager shardManager;
@@ -54,12 +60,21 @@ public class CoreDiscordService implements DiscordService {
     @Override
     public void stop() {
         if (shardManager == null) return;
+        System.out.println("SHardStop");
+        shardManager.setStatus(OnlineStatus.OFFLINE);
+        try {
+            TimeUnit.MILLISECONDS.sleep(1500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         shardManager.shutdown();
     }
 
     @Override
     public void initialize() throws Exception {
+        start();
         Discord.getInstance(EventService.class).scanForEvents(this.getClass());
+        Discord.getInstance(ModuleService.class).callAction(ModuleAction.DISCORD_READY);
     }
 
     @EventHandler

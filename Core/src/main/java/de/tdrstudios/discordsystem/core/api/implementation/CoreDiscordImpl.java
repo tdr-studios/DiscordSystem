@@ -4,6 +4,7 @@ import com.google.inject.Singleton;
 import de.tdrstudios.discordsystem.api.Discord;
 import de.tdrstudios.discordsystem.api.DiscordService;
 import de.tdrstudios.discordsystem.api.modules.ModuleService;
+import de.tdrstudios.discordsystem.api.services.CreateService;
 import de.tdrstudios.discordsystem.console.Console;
 
 /**
@@ -11,6 +12,7 @@ import de.tdrstudios.discordsystem.console.Console;
  * @since 0.1-ALPHA
  */
 @Singleton
+@CreateService(Integer.MAX_VALUE)
 public class CoreDiscordImpl implements Discord.DiscordImpl {
     @Override
     public void shutdown() {

@@ -3,6 +3,7 @@ package de.tdrstudios.discordsystem.core.api.implementation;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Singleton;
+import de.tdrstudios.discordsystem.api.services.CreateService;
 import de.tdrstudios.discordsystem.console.ActionOutputStream;
 import de.tdrstudios.discordsystem.console.Console;
 import de.tdrstudios.discordsystem.console.ConsoleColor;
@@ -32,6 +33,7 @@ import java.util.logging.StreamHandler;
  * @since 0.1-ALPHA
  */
 @Singleton
+@CreateService
 public class CoreConsole implements Console {
     private Terminal terminal;
     private LineReaderImpl lineReader;

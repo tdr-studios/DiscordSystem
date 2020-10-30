@@ -11,9 +11,8 @@ import java.lang.annotation.Target;
  * @author DSeeLP
  * @since 0.1-ALPHA
  */
-@Singleton
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface CreateService {
-
+    int value() default 100;
 }
