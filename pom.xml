@@ -13,6 +13,7 @@
         <module>API</module>
         <module>Core</module>
         <module>ExampleModule</module>
+        <module>ModerationModule</module>
     </modules>
 
     <properties>
