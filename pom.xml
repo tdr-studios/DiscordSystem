@@ -23,6 +23,7 @@
         <jda.version>4.2.0_214</jda.version>
         <jline.version>3.15.0</jline.version>
         <classgraph.version>4.8.78</classgraph.version>
+        <kotlin.version>1.4.10</kotlin.version>
     </properties>
 
     <dependencies>
