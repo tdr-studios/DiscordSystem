@@ -60,7 +60,6 @@ public class CoreDiscordService implements DiscordService {
     @Override
     public void stop() {
         if (shardManager == null) return;
-        System.out.println("SHardStop");
         shardManager.setStatus(OnlineStatus.OFFLINE);
         try {
             TimeUnit.MILLISECONDS.sleep(1500);
