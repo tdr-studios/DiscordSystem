@@ -52,6 +52,7 @@ public class Discord implements Service {
         config.addDefault("bot.activity.activity", "https://github.com/tdr-studios");
         config.addDefault("bot.activity.action", "DEFAULT");
         config.addDefault("bot.activity.status", "ONLINE");
+        config.addDefaultNumberList("adminIds", new ArrayList<>());
         config.addDefault("prefix", "+");
         config.save();
     }
