@@ -7,6 +7,7 @@ import io.github.classgraph.ClassInfo;
 import io.github.classgraph.ClassInfoList;
 import io.github.classgraph.ScanResult;
 
+import java.lang.reflect.Method;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -14,7 +15,7 @@ import java.util.stream.Collectors;
  * @author PXAV
  */
 public class ReflectionUtils {
-    public static Collection<Class<?>> filter(String[] packageNames, Criteria... criteria) {
+    public static Collection<Class<?>> filter(String[] packageNames, ClassCriteria... criteria) {
         // validate given parameters
         Preconditions.checkNotNull(packageNames);
         Preconditions.checkNotNull(criteria);
@@ -33,7 +34,7 @@ public class ReflectionUtils {
             for (ClassInfo current : allClasses) {
                 Class<?> c = current.loadClass();
                 boolean allMatch = true;
-                for (Criteria criterion : criteria) {
+                for (ClassCriteria criterion : criteria) {
                     if (!criterion.matches(c)) {
                         allMatch = false;
                         break;
@@ -42,6 +43,26 @@ public class ReflectionUtils {
                 if (allMatch) {
                     output.add(c);
                 }
+            }
+        }
+
+        return Collections.unmodifiableList(output.stream().filter(Objects::nonNull).collect(Collectors.toList()));
+    }
+
+    public static Collection<Method> filter(Class<?>[] classes, MethodCriteria... criteria) {
+        // validate given parameters
+        Preconditions.checkNotNull(classes);
+        Preconditions.checkNotNull(criteria);
+
+        Set<Method> output = Sets.newHashSet();
+
+        for (Class<?> clazz : classes) {
+            for (Method method : clazz.getMethods()) {
+                boolean allMatch = true;
+                for (MethodCriteria criterion : criteria) {
+                    if (!criterion.matches(method)) allMatch = false;
+                }
+                if (allMatch) output.add(method);
             }
         }
 
