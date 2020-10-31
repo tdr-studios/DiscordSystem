@@ -3,10 +3,10 @@ package de.tdrstudios.discordsystem.core.api.implementation;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Singleton;
-import de.tdrstudios.discordsystem.api.modules.Module;
-import de.tdrstudios.discordsystem.api.modules.ModuleService;
-import de.tdrstudios.discordsystem.api.modules.ModuleMeta;
-import de.tdrstudios.discordsystem.api.modules.CreateModule;
+import de.tdrstudios.discordsystem.api.modules.*;
+import de.tdrstudios.discordsystem.api.services.CreateService;
+import de.tdrstudios.discordsystem.utils.MethodCriteria;
+import de.tdrstudios.discordsystem.utils.ReflectionUtils;
 import javassist.bytecode.AnnotationsAttribute;
 import javassist.bytecode.ClassFile;
 import javassist.bytecode.annotation.Annotation;
@@ -32,6 +32,7 @@ import java.util.jar.JarFile;
  * @since 0.1-ALPHA
  */
 @Singleton
+@CreateService
 public class CoreModuleService implements ModuleService {
 
     private List<Module> modules = new ArrayList<>();
@@ -42,13 +43,20 @@ public class CoreModuleService implements ModuleService {
     public void loadModules(File folder) {
         if (!folder.isDirectory()) return;
         for (File file : folder.listFiles()) {
-            if (file.getName().endsWith(".jar")) {
-                Module module = loadFile(file);
-                if (module == null) continue;
-                if (getModule(module.getName()) != null) continue;
-                modules.add(module);
-            }
+            loadModule(file);
         }
+    }
+
+    @Override
+    public Module loadModule(File file) {
+        if (file.getName().endsWith(".jar")) {
+            Module module = loadFile(file);
+            if (module == null) return null;
+            if (getModule(module.getName()) != null) return null;
+            modules.add(module);
+            return module;
+        }
+        return null;
     }
 
     private List<Module> getLoadOrder() {
@@ -150,7 +158,9 @@ public class CoreModuleService implements ModuleService {
                 } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
                     e.printStackTrace();
                 }
+                assert module != null;
                 module.init(injector, meta);
+                callAction(module, ModuleAction.LOAD);
                 return module;
             }
         }
@@ -200,11 +210,13 @@ public class CoreModuleService implements ModuleService {
     @Override
     public void enable(Module module) {
         module.onEnable();
+        callAction(module, ModuleAction.ENABLE);
     }
 
     @Override
     public void disable(Module module) {
         module.onDisable();
+        callAction(module, ModuleAction.DISABLE);
     }
 
     @Override
@@ -246,6 +258,36 @@ public class CoreModuleService implements ModuleService {
         System.out.println("Loading Modules...");
         loadModules(folder);
         enableAll();
+    }
+
+    @Override
+    public void callAction(ModuleAction action) {
+        if (!(action == ModuleAction.DISABLE || action == ModuleAction.ENABLE || action == ModuleAction.LOAD)) {
+            for (Module module : modules) {
+                for (Method method : ReflectionUtils.filter(new Class[]{module.getClass()}, MethodCriteria.annotatedWith(Execute.class), MethodCriteria.parameterCount(0))) {
+                    if (method.getAnnotation(Execute.class).action() == action) {
+                        try {
+                            method.invoke(module);
+                        } catch (IllegalAccessException | InvocationTargetException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @Override
+    public void callAction(Module module, ModuleAction action) {
+        for (Method method : ReflectionUtils.filter(new Class[]{module.getClass()}, MethodCriteria.annotatedWith(Execute.class), MethodCriteria.parameterCount(0))) {
+            if (method.getAnnotation(Execute.class).action() == action) {
+                try {
+                    method.invoke(module);
+                } catch (IllegalAccessException | InvocationTargetException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     @Override

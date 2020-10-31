@@ -16,7 +16,6 @@ import java.util.List;
  * @author DSeeLP
  * @since 0.1-ALPHA
  */
-@CreateService
 public interface EventService extends Service {
 
     void callEvent(Event event);

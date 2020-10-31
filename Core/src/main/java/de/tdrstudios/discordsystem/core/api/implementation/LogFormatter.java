@@ -51,6 +51,7 @@ public class LogFormatter extends Formatter {
             }else builder.append(defaultColor);
         }
         builder.append(record.getMessage());
+        builder.append(defaultColor);
         builder.append(System.lineSeparator());
         return builder.toString();
     }

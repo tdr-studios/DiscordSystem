@@ -81,7 +81,7 @@ public interface SetupStep {
                 }
                 if (mentionedChannels.size() == 1) {
                     Discord.getInstance(EventService.class).removeListener(this);
-                    setup.completeStep(channel.getIdLong());
+                    setup.completeStep(mentionedChannels.get(0).getIdLong());
                 }
             }
         }

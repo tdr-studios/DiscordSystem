@@ -3,6 +3,7 @@ package de.tdrstudios.discordsystem.core.api.implementation;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Singleton;
+import de.tdrstudios.discordsystem.api.services.CreateService;
 import de.tdrstudios.discordsystem.console.ActionOutputStream;
 import de.tdrstudios.discordsystem.console.Console;
 import de.tdrstudios.discordsystem.console.ConsoleColor;
@@ -22,16 +23,14 @@ import java.lang.reflect.Method;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 import java.util.function.Consumer;
-import java.util.logging.ConsoleHandler;
-import java.util.logging.LogRecord;
-import java.util.logging.Logger;
-import java.util.logging.StreamHandler;
+import java.util.logging.*;
 
 /**
  * @author DSeeLP
  * @since 0.1-ALPHA
  */
 @Singleton
+@CreateService
 public class CoreConsole implements Console {
     private Terminal terminal;
     private LineReaderImpl lineReader;
@@ -64,6 +63,32 @@ public class CoreConsole implements Console {
         handler.setFormatter(new LogFormatter(true));
         Logger.getLogger("org.jline").setUseParentHandlers(false);
         logger.addHandler(handler);
+    }
+
+    public class ConsoleHandler extends java.util.logging.ConsoleHandler {
+        @Override
+        public void publish(LogRecord record) {
+            String[] split = record.getMessage().split(System.lineSeparator());
+            if (split.length != 0) {
+                for (String s : split) {
+                    super.publish(clone(record, s));
+                }
+            }else super.publish(record);
+        }
+        public LogRecord clone(LogRecord record, String msg) {
+            LogRecord r = new LogRecord(record.getLevel(), msg);
+            r.setLoggerName(record.getLoggerName());
+            r.setMillis(record.getMillis());
+            r.setParameters(record.getParameters());
+            r.setResourceBundle(record.getResourceBundle());
+            r.setResourceBundleName(record.getResourceBundleName());
+            r.setSequenceNumber(record.getSequenceNumber());
+            r.setSourceClassName(record.getSourceClassName());
+            r.setSourceMethodName(record.getSourceMethodName());
+            r.setThreadID(record.getThreadID());
+            r.setThrown(record.getThrown());
+            return r;
+        }
     }
 
     private Logger logger;

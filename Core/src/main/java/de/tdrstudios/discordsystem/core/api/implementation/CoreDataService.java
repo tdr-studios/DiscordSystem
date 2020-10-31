@@ -10,6 +10,10 @@ import de.dseelp.database.api.storage.StringStorage;
 import de.dseelp.database.api.table.Table;
 import de.dseelp.database.api.table.TableEntry;
 import de.tdrstudios.discordsystem.api.DataService;
+import de.tdrstudios.discordsystem.api.Discord;
+import de.tdrstudios.discordsystem.api.modules.ModuleAction;
+import de.tdrstudios.discordsystem.api.modules.ModuleService;
+import de.tdrstudios.discordsystem.api.services.CreateService;
 import de.tdrstudios.discordsystem.utils.JsonDocument;
 
 import java.io.File;
@@ -19,6 +23,7 @@ import java.io.File;
  * @since 0.1-ALPHA
  */
 @Singleton
+@CreateService
 public class CoreDataService implements DataService {
     private Database database;
 
@@ -44,5 +49,6 @@ public class CoreDataService implements DataService {
         database = Database.createDatabase(new JsonAdapter(true, new File("guildData.json")));
         database.connect();
         database.createTable("guildData", new Column("id", true, LongStorage.class), new Column("json", false, StringStorage.class));
+        Discord.getInstance(ModuleService.class).callAction(ModuleAction.DATA_READY);
     }
 }

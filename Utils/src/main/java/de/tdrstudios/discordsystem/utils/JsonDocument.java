@@ -151,6 +151,7 @@ public class JsonDocument {
         if (element.isJsonArray()) {
             List<Number> list = new ArrayList<>();
             JsonArray array = element.getAsJsonArray();
+            if (array.size() == 0) return Collections.emptyList();
             for (JsonElement jsonElement : array) {
                 if (jsonElement.isJsonPrimitive()) {
                     list.add(jsonElement.getAsNumber());
@@ -166,6 +167,7 @@ public class JsonDocument {
         if (element.isJsonArray()) {
             List<Integer> list = new ArrayList<>();
             JsonArray array = element.getAsJsonArray();
+            if (array.size() == 0) return Collections.emptyList();
             for (JsonElement jsonElement : array) {
                 if (jsonElement.isJsonPrimitive()) {
                     list.add(jsonElement.getAsInt());
@@ -181,6 +183,7 @@ public class JsonDocument {
         if (element.isJsonArray()) {
             List<Long> list = new ArrayList<>();
             JsonArray array = element.getAsJsonArray();
+            if (array.size() == 0) return Collections.emptyList();
             for (JsonElement jsonElement : array) {
                 if (jsonElement.isJsonPrimitive()) {
                     list.add(jsonElement.getAsLong());
@@ -196,6 +199,7 @@ public class JsonDocument {
         if (element.isJsonArray()) {
             List<Double> list = new ArrayList<>();
             JsonArray array = element.getAsJsonArray();
+            if (array.size() == 0) return Collections.emptyList();
             for (JsonElement jsonElement : array) {
                 if (jsonElement.isJsonPrimitive()) {
                     list.add(jsonElement.getAsDouble());
@@ -211,6 +215,7 @@ public class JsonDocument {
         if (element.isJsonArray()) {
             List<Float> list = new ArrayList<>();
             JsonArray array = element.getAsJsonArray();
+            if (array.size() == 0) return Collections.emptyList();
             for (JsonElement jsonElement : array) {
                 if (jsonElement.isJsonPrimitive()) {
                     list.add(jsonElement.getAsFloat());
@@ -226,6 +231,7 @@ public class JsonDocument {
         if (element.isJsonArray()) {
             List<Character> list = new ArrayList<>();
             JsonArray array = element.getAsJsonArray();
+            if (array.size() == 0) return Collections.emptyList();
             for (JsonElement jsonElement : array) {
                 if (jsonElement.isJsonPrimitive()) {
                     list.add(jsonElement.getAsJsonPrimitive().getAsCharacter());

@@ -5,15 +5,21 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import de.tdrstudios.discordsystem.api.DataService;
 import de.tdrstudios.discordsystem.api.Discord;
+import de.tdrstudios.discordsystem.api.ModuleDownloadService;
 import de.tdrstudios.discordsystem.api.commands.CommandService;
 import de.tdrstudios.discordsystem.api.DiscordService;
 import de.tdrstudios.discordsystem.api.event.EventService;
 import de.tdrstudios.discordsystem.api.modules.ModuleService;
+import de.tdrstudios.discordsystem.api.sound.SoundService;
 import de.tdrstudios.discordsystem.console.Console;
 import de.tdrstudios.discordsystem.console.LogSystem;
 import de.tdrstudios.discordsystem.core.api.implementation.*;
+import de.tdrstudios.discordsystem.core.api.implementation.sound.CoreSoundService;
 import de.tdrstudios.discordsystem.core.system.CoreSystem;
+import de.tdrstudios.discordsystem.utils.GsonUtils;
+import de.tdrstudios.discordsystem.version.Serializer;
 import lombok.Getter;
+import org.apache.maven.artifact.versioning.DefaultArtifactVersion;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -27,6 +33,10 @@ public class CoreBootstrap {
     @Getter
     private static Injector injector;
     public static void main(String[] args) {
+        if (Float.parseFloat(System.getProperty("java.class.version")) < 52D) {
+            System.out.println("This application needs Java 8 or 10.0.1");
+            return;
+        }
         injector = Guice.createInjector(new AbstractModule() {
             @Override
             protected void configure() {
@@ -40,8 +50,11 @@ public class CoreBootstrap {
                 bind(ModuleService.class).to(CoreModuleService.class);
                 bind(DataService.class).to(CoreDataService.class);
                 bind(EventService.class).to(CoreEventService.class);
+                bind(SoundService.class).to(CoreSoundService.class);
+                bind(ModuleDownloadService.class).to(CoreModuleDownloadService.class);
             }
         });
+        GsonUtils.addAdapter(DefaultArtifactVersion.class, new Serializer());
         Console console = injector.getInstance(Console.class);
         injector.injectMembers(console);
         LogSystem logSystem = new LogSystem(console.getLogger());
