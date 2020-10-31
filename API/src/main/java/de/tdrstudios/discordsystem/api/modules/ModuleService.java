@@ -10,6 +10,7 @@ import java.io.File;
  */
 public interface ModuleService extends Service {
     void loadModules(File folder);
+    Module loadModule(File file);
 
     void unloadModules(File folder);
     void unloadModule(Module module);

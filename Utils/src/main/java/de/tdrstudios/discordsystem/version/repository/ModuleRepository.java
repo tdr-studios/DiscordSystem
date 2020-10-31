@@ -27,10 +27,10 @@ public class ModuleRepository {
     public static ModuleRepository findRepository(WebHelper webHelper) {
         JsonDocument config = webHelper.getFromFile("config.repo");
         boolean useDefault = config == null;
-        String fileName = "repository.json";
+        String fileName = "repo.json";
         if (!useDefault) {
-            if (config.has("moduleRepo")) {
-                JsonDocument doc = config.getDocument("moduleRepo");
+            if (config.has("moduleRepo2")) {
+                JsonDocument doc = config.getDocument("moduleRepo2");
                 if (doc.has("fileName")) {
                     fileName = doc.getString("fileName");
                 }

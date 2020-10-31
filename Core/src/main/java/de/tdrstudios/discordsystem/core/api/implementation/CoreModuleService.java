@@ -43,13 +43,20 @@ public class CoreModuleService implements ModuleService {
     public void loadModules(File folder) {
         if (!folder.isDirectory()) return;
         for (File file : folder.listFiles()) {
-            if (file.getName().endsWith(".jar")) {
-                Module module = loadFile(file);
-                if (module == null) continue;
-                if (getModule(module.getName()) != null) continue;
-                modules.add(module);
-            }
+            loadModule(file);
         }
+    }
+
+    @Override
+    public Module loadModule(File file) {
+        if (file.getName().endsWith(".jar")) {
+            Module module = loadFile(file);
+            if (module == null) return null;
+            if (getModule(module.getName()) != null) return null;
+            modules.add(module);
+            return module;
+        }
+        return null;
     }
 
     private List<Module> getLoadOrder() {
