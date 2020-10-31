@@ -91,7 +91,11 @@ public class Discord implements Service {
         System.out.println("Found "+count+" EventHandlers in "+ Arrays.toString(packageString) +"!");
     }
 
-    public static void scanCommands(String packageString) {
+    public static void test(String... packageString) {
+        scanEventHandler(packageString);
+    }
+
+    public static void scanCommands(String... packageString) {
         getInstance(CommandService.class).scanCommands(packageString);
     }
 
@@ -107,7 +111,7 @@ public class Discord implements Service {
         getInstance(DiscordImpl.class).shutdown();
     }
 
-    public static interface DiscordImpl extends Service {
+    public interface DiscordImpl extends Service {
         void shutdown();
         String getVersion();
         String getVersionNickname();
