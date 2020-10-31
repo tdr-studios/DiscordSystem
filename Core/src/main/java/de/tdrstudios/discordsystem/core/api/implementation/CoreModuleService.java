@@ -13,7 +13,6 @@ import javassist.bytecode.annotation.Annotation;
 import javassist.bytecode.annotation.ArrayMemberValue;
 import javassist.bytecode.annotation.MemberValue;
 import javassist.bytecode.annotation.StringMemberValue;
-import sun.reflect.Reflection;
 
 import java.io.DataInputStream;
 import java.io.File;
@@ -27,7 +26,6 @@ import java.net.URLClassLoader;
 import java.util.*;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
-import java.util.stream.Collector;
 
 /**
  * @author DSeeLP

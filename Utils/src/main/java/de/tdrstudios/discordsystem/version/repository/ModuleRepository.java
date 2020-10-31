@@ -13,6 +13,7 @@ import org.apache.maven.artifact.versioning.DefaultArtifactVersion;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class ModuleRepository {
     @Getter
     private List<DownloadableModule> modules;
@@ -22,8 +23,6 @@ public class ModuleRepository {
 
     @Getter
     private ModuleRepositoryType type;
-
-    private ModuleRepository() {}
 
     public static ModuleRepository findRepository(WebHelper webHelper) {
         JsonDocument config = webHelper.getFromFile("config.repo");
@@ -50,6 +49,8 @@ public class ModuleRepository {
             if (element.isJsonObject()) {
                 DownloadableModule module = GsonUtils.get().fromJson(element, DownloadableModule.class);
                 if (module.getType() == null) module.setType(ModuleType.UNDEFINED);
+                module.setCoreVersion(null);
+                module.setInstalledVersion(null);
                 modules.add(module);
             }
         }

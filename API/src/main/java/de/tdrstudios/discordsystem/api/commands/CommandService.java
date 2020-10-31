@@ -11,7 +11,6 @@ import java.util.Collection;
  * @author DSeeLP
  * @since 0.1-ALPHA
  */
-@CreateService
 public interface CommandService extends Service {
     /**
      *
@@ -26,7 +25,7 @@ public interface CommandService extends Service {
 
     /**
      * This method scans the specified package for commands.
-     * @see Discord#scanCommands(String)
+     * @see Discord#scanCommands(String...)
      * @param packageString The package which will be scanned
      */
     void scanCommands(String... packageString);
@@ -35,7 +34,7 @@ public interface CommandService extends Service {
      *
      * @param command
      * @param annotation
-     * @see Discord#scanCommands(String)
+     * @see Discord#scanCommands(String...)
      */
     void registerCommand(Command command, CreateCommand annotation);
 
