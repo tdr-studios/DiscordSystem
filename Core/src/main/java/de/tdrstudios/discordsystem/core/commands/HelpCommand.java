@@ -2,12 +2,12 @@ package de.tdrstudios.discordsystem.core.commands;
 
 import de.tdrstudios.discordsystem.api.Discord;
 import de.tdrstudios.discordsystem.api.commands.*;
-import de.tdrstudios.discordsystem.api.event.EventHandler;
-import de.tdrstudios.discordsystem.api.event.events.internal.CommandRegisterEvent;
 import net.dv8tion.jda.api.EmbedBuilder;
 
 import java.awt.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 @CreateCommand(name = "help", executorType = ExecutorType.ALL)

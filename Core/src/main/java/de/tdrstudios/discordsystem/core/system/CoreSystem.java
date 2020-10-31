@@ -5,18 +5,15 @@ import com.google.inject.Injector;
 import com.google.inject.Singleton;
 import de.tdrstudios.discordsystem.api.Discord;
 import de.tdrstudios.discordsystem.api.event.EventHandler;
-import de.tdrstudios.discordsystem.api.event.events.console.ConsoleMessageReadEvent;
-import de.tdrstudios.discordsystem.api.DiscordService;
 import de.tdrstudios.discordsystem.api.event.EventService;
+import de.tdrstudios.discordsystem.api.event.events.console.ConsoleMessageReadEvent;
 import de.tdrstudios.discordsystem.api.event.events.internal.ApplicationReadyEvent;
 import de.tdrstudios.discordsystem.api.modules.ModuleAction;
 import de.tdrstudios.discordsystem.api.modules.ModuleService;
 import de.tdrstudios.discordsystem.console.Console;
-import de.tdrstudios.discordsystem.console.LogSystem;
 
 import javax.annotation.PostConstruct;
 import java.text.DecimalFormat;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author DSeeLP

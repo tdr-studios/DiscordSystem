@@ -1,6 +1,5 @@
 package de.tdrstudios.discordsystem.console;
 
-import lombok.Getter;
 import org.fusesource.jansi.Ansi;
 
 /**

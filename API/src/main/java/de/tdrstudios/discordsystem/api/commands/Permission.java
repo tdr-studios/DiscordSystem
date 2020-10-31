@@ -1,7 +1,5 @@
 package de.tdrstudios.discordsystem.api.commands;
 
-import de.dseelp.database.api.storage.StringStorage;
-
 public interface Permission {
     boolean check(CommandSender sender);
 

@@ -1,6 +1,5 @@
 package de.tdrstudios.discordsystem.api.event.events.internal;
 
-import com.google.inject.Injector;
 import de.tdrstudios.discordsystem.api.event.Event;
 
 /**

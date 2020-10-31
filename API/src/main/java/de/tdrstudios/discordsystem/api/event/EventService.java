@@ -1,16 +1,6 @@
 package de.tdrstudios.discordsystem.api.event;
 
-import com.google.inject.Inject;
-import com.google.inject.Injector;
-import com.google.inject.Singleton;
-import de.tdrstudios.discordsystem.api.services.CreateService;
 import de.tdrstudios.discordsystem.api.services.Service;
-
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 /**
  * @author DSeeLP

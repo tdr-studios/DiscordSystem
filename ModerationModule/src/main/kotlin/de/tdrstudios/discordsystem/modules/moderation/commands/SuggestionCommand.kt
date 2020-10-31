@@ -9,7 +9,6 @@ import net.dv8tion.jda.api.entities.TextChannel
 import java.awt.Color
 import java.time.Instant
 import java.util.concurrent.TimeUnit
-import java.util.function.Consumer
 
 @CreateCommand(name = "suggestion", executorType = ExecutorType.GUILD)
 class SuggestionCommand : Command() {

@@ -1,7 +1,10 @@
 package de.tdrstudios.discordsystem.modules.moderation
 
 import de.tdrstudios.discordsystem.api.Discord
-import de.tdrstudios.discordsystem.api.modules.*
+import de.tdrstudios.discordsystem.api.modules.CreateModule
+import de.tdrstudios.discordsystem.api.modules.Execute
+import de.tdrstudios.discordsystem.api.modules.Module
+import de.tdrstudios.discordsystem.api.modules.ModuleAction
 
 @CreateModule(name = "Moderation", version = "1.0", authors = ["DSeeLP"], description = "This Module provides some Moderation features")
 class ModerationModule() : Module() {

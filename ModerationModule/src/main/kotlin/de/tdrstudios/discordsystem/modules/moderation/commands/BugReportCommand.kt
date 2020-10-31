@@ -7,9 +7,7 @@ import de.tdrstudios.discordsystem.utils.JsonDocument
 import net.dv8tion.jda.api.EmbedBuilder
 import net.dv8tion.jda.api.entities.TextChannel
 import java.awt.Color
-import java.time.Instant
 import java.util.concurrent.TimeUnit
-import java.util.function.Consumer
 
 @CreateCommand(name = "bugreport", executorType = ExecutorType.GUILD)
 class BugReportCommand : Command() {

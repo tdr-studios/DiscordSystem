@@ -2,10 +2,10 @@ package de.tdrstudios.discordsystem.core.api.implementation;
 
 import com.google.inject.Singleton;
 import de.tdrstudios.discordsystem.api.Discord;
-import de.tdrstudios.discordsystem.api.event.EventService;
-import de.tdrstudios.discordsystem.api.event.events.discord.ListenerAdapter;
 import de.tdrstudios.discordsystem.api.DiscordService;
 import de.tdrstudios.discordsystem.api.event.EventHandler;
+import de.tdrstudios.discordsystem.api.event.EventService;
+import de.tdrstudios.discordsystem.api.event.events.discord.ListenerAdapter;
 import de.tdrstudios.discordsystem.api.modules.ModuleAction;
 import de.tdrstudios.discordsystem.api.modules.ModuleService;
 import de.tdrstudios.discordsystem.api.services.CreateService;
@@ -20,7 +20,6 @@ import net.dv8tion.jda.api.sharding.ShardManager;
 import javax.security.auth.login.LoginException;
 import java.util.concurrent.CompletionException;
 import java.util.concurrent.TimeUnit;
-import java.util.function.IntFunction;
 
 /**
  * @author DSeeLP

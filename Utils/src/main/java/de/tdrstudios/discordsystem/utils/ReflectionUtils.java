@@ -8,7 +8,10 @@ import io.github.classgraph.ClassInfoList;
 import io.github.classgraph.ScanResult;
 
 import java.lang.reflect.Method;
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**

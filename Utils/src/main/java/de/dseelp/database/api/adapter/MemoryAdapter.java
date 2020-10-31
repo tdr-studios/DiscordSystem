@@ -1,15 +1,11 @@
 package de.dseelp.database.api.adapter;
 
 import de.dseelp.database.api.DatabaseAdapter;
-import de.dseelp.database.api.column.Column;
 import de.dseelp.database.api.column.ColumnEntry;
 import de.dseelp.database.api.table.Table;
 import de.dseelp.database.api.table.TableEntry;
-import javafx.scene.control.Tab;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 

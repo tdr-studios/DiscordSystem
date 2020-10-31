@@ -4,9 +4,9 @@ import de.tdrstudios.discordsystem.api.Discord;
 import de.tdrstudios.discordsystem.api.commands.CommandSender;
 import de.tdrstudios.discordsystem.api.commands.CommandService;
 import de.tdrstudios.discordsystem.api.commands.ConsoleCommandSender;
-import de.tdrstudios.discordsystem.api.event.events.console.ConsoleMessageReadEvent;
 import de.tdrstudios.discordsystem.api.event.EventHandler;
 import de.tdrstudios.discordsystem.api.event.HandleEvents;
+import de.tdrstudios.discordsystem.api.event.events.console.ConsoleMessageReadEvent;
 
 import java.util.Arrays;
 

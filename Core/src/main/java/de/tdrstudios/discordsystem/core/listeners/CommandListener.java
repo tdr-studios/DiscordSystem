@@ -1,7 +1,10 @@
 package de.tdrstudios.discordsystem.core.listeners;
 
 import de.tdrstudios.discordsystem.api.Discord;
-import de.tdrstudios.discordsystem.api.commands.*;
+import de.tdrstudios.discordsystem.api.commands.CommandSender;
+import de.tdrstudios.discordsystem.api.commands.CommandService;
+import de.tdrstudios.discordsystem.api.commands.GuildDiscordCommandSender;
+import de.tdrstudios.discordsystem.api.commands.PrivateDiscordCommandSender;
 import de.tdrstudios.discordsystem.api.event.EventHandler;
 import de.tdrstudios.discordsystem.api.event.HandleEvents;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;

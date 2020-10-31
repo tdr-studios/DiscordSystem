@@ -9,8 +9,6 @@ import de.tdrstudios.discordsystem.console.Console;
 import de.tdrstudios.discordsystem.console.ConsoleColor;
 import lombok.Getter;
 import lombok.Setter;
-import org.apache.commons.lang3.reflect.FieldUtils;
-import org.apache.commons.lang3.reflect.MethodUtils;
 import org.fusesource.jansi.AnsiConsole;
 import org.jline.reader.impl.LineReaderImpl;
 import org.jline.terminal.Terminal;
@@ -23,7 +21,9 @@ import java.lang.reflect.Method;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 import java.util.function.Consumer;
-import java.util.logging.*;
+import java.util.logging.LogRecord;
+import java.util.logging.Logger;
+import java.util.logging.StreamHandler;
 
 /**
  * @author DSeeLP
