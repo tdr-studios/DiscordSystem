@@ -26,7 +26,7 @@ public class CoreDiscordImpl implements Discord.DiscordImpl {
 
     @Override
     public String getVersion() {
-        return "0.1-ALPHA";
+        return "0.2-ALPHA";
     }
 
     @Override
