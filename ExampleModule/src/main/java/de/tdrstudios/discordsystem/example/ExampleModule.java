@@ -8,7 +8,7 @@ import de.tdrstudios.discordsystem.api.modules.Module;
  * @author DSeeLP
  * @since 0.1-ALPHA
  */
-@CreateModule(name = "ExampleModule", version = "0.1-ALPA", authors = "DSeeLPYT")
+@CreateModule(name = "ExampleModule", version = "0.2-ALPHA", authors = "DSeeLPYT")
 public class ExampleModule extends Module {
     @Override
     public void onEnable() {
