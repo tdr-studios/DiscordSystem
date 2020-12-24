@@ -23,7 +23,7 @@
         <reflections.version>0.9.11</reflections.version>
         <jda.version>4.2.0_221</jda.version>
         <jline.version>3.17.1</jline.version>
-        <classgraph.version>4.8.90</classgraph.version>
+        <classgraph.version>4.8.98</classgraph.version>
         <kotlin.version>1.4.20</kotlin.version>
     </properties>
 
