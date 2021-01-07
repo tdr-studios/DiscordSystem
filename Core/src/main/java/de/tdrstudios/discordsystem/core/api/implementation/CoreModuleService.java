@@ -63,6 +63,7 @@ public class CoreModuleService implements ModuleService {
 
     private List<Module> getLoadOrder() {
         List<Module> moduleLoadOrder = new ArrayList<>();
+        //DependencySorter.sortModules(modules);
         for (int i = 0; i < modules.size(); i++) {
             Module module = modules.get(i);
             int remove = 1;
@@ -116,7 +117,8 @@ public class CoreModuleService implements ModuleService {
                 ArrayMemberValue hardDependencyValue = (ArrayMemberValue) annotation.getMemberValue("hardDependencies");
                 ArrayMemberValue softDependencyValue = (ArrayMemberValue) annotation.getMemberValue("softDependencies");
 
-                URLClassLoader loader = (URLClassLoader) CoreModuleService.class.getClassLoader();
+                URLClassLoader loader = null;
+                loader = (URLClassLoader) CoreModuleService.class.getClassLoader();
                 Method addURL = null;
                 try {
                     addURL = URLClassLoader.class.getDeclaredMethod("addURL", URL.class);
@@ -294,5 +296,6 @@ public class CoreModuleService implements ModuleService {
 
     @Override
     public void initialize() throws Exception {
+
     }
 }
