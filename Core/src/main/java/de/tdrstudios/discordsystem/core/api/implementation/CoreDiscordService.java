@@ -41,13 +41,14 @@ public class CoreDiscordService implements DiscordService {
         if (shardManager != null) return;
         JsonConfig config = Discord.getConfig();
         try {
-            shardManager = DefaultShardManagerBuilder.createDefault(config.getString("bot.token")).build();
+            DefaultShardManagerBuilder builder = DefaultShardManagerBuilder.createDefault(config.getString("bot.token"));
+            shardManager = builder.build();
             shardManager.addEventListener(Discord.getInstance(ListenerAdapter.class));
             for (JDA shard : shardManager.getShards()) {
                 shard.awaitReady();
             }
         } catch (LoginException | CompletionException e) {
-            System.err.println("Failed to start the DiscordAPI! "+e.getCause().getMessage());
+            System.err.println("Failed to start the Discord JDA! "+e.getCause().getMessage());
             Discord.shutdown();
         } catch (InterruptedException e) {
             e.printStackTrace();
