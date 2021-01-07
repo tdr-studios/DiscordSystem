@@ -12,7 +12,7 @@ import net.dv8tion.jda.api.requests.RestAction;
  * @author DSeeLP
  * @since 0.1-ALPHA
  */
-public class PrivateDiscordCommandSender implements CommandSender{
+public class PrivateDiscordCommandSender implements MessageCommandSender<PrivateChannel>{
     public PrivateMessageReceivedEvent getEvent() {
         return event;
     }
@@ -53,10 +53,12 @@ public class PrivateDiscordCommandSender implements CommandSender{
         return permission.check(this);
     }
 
+    @Override
     public User getAuthor() {
         return event.getAuthor();
     }
 
+    @Override
     public PrivateChannel getChannel() {
         return event.getChannel();
     }

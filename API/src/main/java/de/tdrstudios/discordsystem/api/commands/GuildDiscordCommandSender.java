@@ -9,7 +9,7 @@ import net.dv8tion.jda.api.requests.RestAction;
  * @author DSeeLP
  * @since 0.1-ALPHA
  */
-public class GuildDiscordCommandSender implements CommandSender {
+public class GuildDiscordCommandSender implements MessageCommandSender<TextChannel> {
     public GuildMessageReceivedEvent getEvent() {
         return event;
     }
