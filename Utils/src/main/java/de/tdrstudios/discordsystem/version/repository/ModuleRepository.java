@@ -25,8 +25,8 @@ public class ModuleRepository {
         boolean useDefault = config == null;
         String fileName = "repo.json";
         if (!useDefault) {
-            if (config.has("moduleRepo2")) {
-                JsonDocument doc = config.getDocument("moduleRepo2");
+            if (config.has("dc2Repo")) {
+                JsonDocument doc = config.getDocument("dc2Repo");
                 if (doc.has("fileName")) {
                     fileName = doc.getString("fileName");
                 }
