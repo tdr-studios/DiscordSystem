@@ -2,7 +2,9 @@ package de.tdrstudios.discordsystem.example;
 
 import de.tdrstudios.discordsystem.api.Discord;
 import de.tdrstudios.discordsystem.api.modules.CreateModule;
+import de.tdrstudios.discordsystem.api.modules.Execute;
 import de.tdrstudios.discordsystem.api.modules.Module;
+import de.tdrstudios.discordsystem.api.modules.ModuleAction;
 
 /**
  * @author DSeeLP
@@ -10,8 +12,8 @@ import de.tdrstudios.discordsystem.api.modules.Module;
  */
 @CreateModule(name = "ExampleModule", version = "0.2-ALPHA", authors = "DSeeLPYT")
 public class ExampleModule extends Module {
-    @Override
-    public void onEnable() {
+    @Execute(action = ModuleAction.DISCORD_READY)
+    public void enable() {
         System.out.println("ExampleModule enabled");
         final String packageString = getClass().getPackage().getName();
         Discord.scanServices(packageString);
@@ -19,8 +21,8 @@ public class ExampleModule extends Module {
         Discord.scanEventHandler(packageString);
     }
 
-    @Override
-    public void onDisable() {
+    @Execute(action = ModuleAction.DISABLE)
+    public void disable() {
         System.out.println("ExampleModule disabled");
     }
 }
