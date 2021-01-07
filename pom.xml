@@ -43,5 +43,13 @@
         </repository>
     </repositories>
 
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub TDR-Studios Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/tdr-studios/DiscordSystem</url>
+        </repository>
+    </distributionManagement>
+
 
 </project>
