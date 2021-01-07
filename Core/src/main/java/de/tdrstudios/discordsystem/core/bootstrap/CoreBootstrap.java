@@ -18,7 +18,6 @@ import de.tdrstudios.discordsystem.core.api.implementation.sound.CoreSoundServic
 import de.tdrstudios.discordsystem.core.system.CoreSystem;
 import de.tdrstudios.discordsystem.utils.GsonUtils;
 import de.tdrstudios.discordsystem.version.Serializer;
-import lombok.Getter;
 import org.apache.maven.artifact.versioning.DefaultArtifactVersion;
 
 import java.util.concurrent.ExecutorService;
@@ -30,7 +29,6 @@ import java.util.concurrent.ScheduledExecutorService;
  * @since 0.1-ALPHA
  */
 public class CoreBootstrap {
-    @Getter
     private static Injector injector;
     public static void main(String[] args) {
         if (Float.parseFloat(System.getProperty("java.class.version")) < 52D) {
@@ -63,5 +61,9 @@ public class CoreBootstrap {
         Discord.DiscordImpl discord = injector.getInstance(Discord.DiscordImpl.class);
         System.out.println("Starting DiscordSystem v"+discord.getVersion()+" \""+discord.getVersionNickname()+"\"");
         injector.getInstance(CoreSystem.class).initializeSystem();
+    }
+
+    public static Injector getInjector() {
+        return CoreBootstrap.injector;
     }
 }

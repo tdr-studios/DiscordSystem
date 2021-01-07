@@ -1,10 +1,6 @@
 package de.dseelp.database.api.table;
 
 import de.dseelp.database.api.column.ColumnEntry;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.List;
 
@@ -12,12 +8,15 @@ import java.util.List;
  * @author DSeeLP
  * @since 0.1-ALPHA
  */
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
 public class TableEntry {
     private List<ColumnEntry> entries;
+
+    public TableEntry(List<ColumnEntry> entries) {
+        this.entries = entries;
+    }
+
+    public TableEntry() {
+    }
 
     public ColumnEntry getPrimary() {
         for (ColumnEntry entry : entries) {
@@ -32,5 +31,13 @@ public class TableEntry {
             if (entry.getColumn().getName().toLowerCase().equals(name)) return entry;
         }
         return null;
+    }
+
+    public List<ColumnEntry> getEntries() {
+        return this.entries;
+    }
+
+    public void setEntries(List<ColumnEntry> entries) {
+        this.entries = entries;
     }
 }

@@ -7,8 +7,6 @@ import de.tdrstudios.discordsystem.api.services.CreateService;
 import de.tdrstudios.discordsystem.console.ActionOutputStream;
 import de.tdrstudios.discordsystem.console.Console;
 import de.tdrstudios.discordsystem.console.ConsoleColor;
-import lombok.Getter;
-import lombok.Setter;
 import org.fusesource.jansi.AnsiConsole;
 import org.jline.reader.impl.LineReaderImpl;
 import org.jline.terminal.Terminal;
@@ -35,9 +33,7 @@ public class CoreConsole implements Console {
     private Terminal terminal;
     private LineReaderImpl lineReader;
     private String prompt;
-    @Getter
     private boolean loopRunning;
-    @Getter
     private boolean reading;
     private Future<?> loopFuture = null;
 
@@ -63,6 +59,22 @@ public class CoreConsole implements Console {
         handler.setFormatter(new LogFormatter(true));
         Logger.getLogger("org.jline").setUseParentHandlers(false);
         logger.addHandler(handler);
+    }
+
+    public boolean isLoopRunning() {
+        return this.loopRunning;
+    }
+
+    public boolean isReading() {
+        return this.reading;
+    }
+
+    public Consumer<String> getMessageConsumer() {
+        return this.messageConsumer;
+    }
+
+    public void setMessageConsumer(Consumer<String> messageConsumer) {
+        this.messageConsumer = messageConsumer;
     }
 
     public class ConsoleHandler extends java.util.logging.ConsoleHandler {
@@ -120,8 +132,6 @@ public class CoreConsole implements Console {
         });
     }
 
-    @Setter
-    @Getter
     private Consumer<String> messageConsumer;
 
     @Override

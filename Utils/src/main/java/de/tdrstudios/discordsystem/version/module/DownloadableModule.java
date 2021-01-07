@@ -1,9 +1,6 @@
 package de.tdrstudios.discordsystem.version.module;
 
 import com.google.gson.annotations.Expose;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
 import org.apache.maven.artifact.versioning.DefaultArtifactVersion;
 
 import java.util.ArrayList;
@@ -14,27 +11,26 @@ import java.util.List;
  * @author DSeeLP
  * @since 0.1-ALPHA
  */
-@AllArgsConstructor
 public class DownloadableModule {
-    @Getter
-    @Setter
     @Expose
     private DefaultArtifactVersion coreVersion;
-    @Getter
-    @Setter
     @Expose
     private DefaultArtifactVersion installedVersion;
 
-    @Getter
     private final String name;
-    @Getter
     private final String[] authors;
-    @Getter
     private final String description;
 
-    @Getter
-    @Setter
     private ModuleType type;
+
+    public DownloadableModule(DefaultArtifactVersion coreVersion, DefaultArtifactVersion installedVersion, String name, String[] authors, String description, ModuleType type) {
+        this.coreVersion = coreVersion;
+        this.installedVersion = installedVersion;
+        this.name = name;
+        this.authors = authors;
+        this.description = description;
+        this.type = type;
+    }
 
     public List<DownloadableModuleVersion> getVersions() {
         Collections.sort(versions);
@@ -77,4 +73,39 @@ public class DownloadableModule {
     }
 
 
+    public DefaultArtifactVersion getCoreVersion() {
+        return this.coreVersion;
+    }
+
+    public DefaultArtifactVersion getInstalledVersion() {
+        return this.installedVersion;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public String[] getAuthors() {
+        return this.authors;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public ModuleType getType() {
+        return this.type;
+    }
+
+    public void setCoreVersion(DefaultArtifactVersion coreVersion) {
+        this.coreVersion = coreVersion;
+    }
+
+    public void setInstalledVersion(DefaultArtifactVersion installedVersion) {
+        this.installedVersion = installedVersion;
+    }
+
+    public void setType(ModuleType type) {
+        this.type = type;
+    }
 }

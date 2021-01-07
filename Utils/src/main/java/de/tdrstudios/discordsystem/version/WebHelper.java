@@ -2,7 +2,6 @@ package de.tdrstudios.discordsystem.version;
 
 import com.google.gson.JsonParser;
 import de.tdrstudios.discordsystem.utils.JsonDocument;
-import lombok.Getter;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -20,7 +19,6 @@ import java.net.URL;
  * @since 0.1-ALPHA
  */
 public class WebHelper {
-    @Getter
     private final String baseUrl;
     private HttpClient httpClient;
 
@@ -71,5 +69,9 @@ public class WebHelper {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public String getBaseUrl() {
+        return this.baseUrl;
     }
 }

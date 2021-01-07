@@ -1,16 +1,19 @@
 package de.dseelp.database.api.storage;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-
 /**
  * @author DSeeLP
  * @since 0.1-ALPHA
  */
-@AllArgsConstructor
-@NoArgsConstructor
 public class BooleanStorage implements StorageObject {
     private boolean b;
+
+    public BooleanStorage(boolean b) {
+        this.b = b;
+    }
+
+    public BooleanStorage() {
+    }
+
     @Override
     public Object get() {
         return b;

@@ -1,16 +1,19 @@
 package de.dseelp.database.api.storage;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-
 /**
  * @author DSeeLP
  * @since 0.1-ALPHA
  */
-@AllArgsConstructor
-@NoArgsConstructor
 public class LongStorage implements StorageObject {
     private long l;
+
+    public LongStorage(long l) {
+        this.l = l;
+    }
+
+    public LongStorage() {
+    }
+
     @Override
     public Object get() {
         return l;

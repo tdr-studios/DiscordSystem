@@ -1,9 +1,6 @@
 package de.tdrstudios.discordsystem.version.core;
 
 import com.google.gson.annotations.Expose;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import org.apache.maven.artifact.versioning.DefaultArtifactVersion;
 
 import java.util.ArrayList;
@@ -14,14 +11,19 @@ import java.util.List;
  * @author DSeeLP
  * @since 0.1-ALPHA
  */
-@AllArgsConstructor
-@RequiredArgsConstructor
 public class DownloadableCore {
-    @Getter
     @Expose
     private final DefaultArtifactVersion currentVersion;
-    @Getter
     private List<DownloadableCoreVersion> versions = new ArrayList<>();
+
+    public DownloadableCore(DefaultArtifactVersion currentVersion) {
+        this.currentVersion = currentVersion;
+    }
+
+    public DownloadableCore(DefaultArtifactVersion currentVersion, List<DownloadableCoreVersion> versions) {
+        this.currentVersion = currentVersion;
+        this.versions = versions;
+    }
 
     public DownloadableCoreVersion getLatest() {
         Collections.sort(versions);
@@ -47,4 +49,11 @@ public class DownloadableCore {
     }
 
 
+    public DefaultArtifactVersion getCurrentVersion() {
+        return this.currentVersion;
+    }
+
+    public List<DownloadableCoreVersion> getVersions() {
+        return this.versions;
+    }
 }

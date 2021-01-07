@@ -4,7 +4,6 @@ import de.dseelp.database.api.DatabaseAdapter;
 import de.dseelp.database.api.column.Column;
 import de.dseelp.database.api.column.ColumnEntry;
 import de.dseelp.database.api.storage.*;
-import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +12,6 @@ import java.util.List;
  * @author DSeeLP
  * @since 0.1-ALPHA
  */
-@Getter
 public class Table {
     private DatabaseAdapter adapter;
     private final String name;
@@ -140,5 +138,17 @@ public class Table {
             if (column.getName().equals(columnName)) return column;
         }
         return null;
+    }
+
+    public DatabaseAdapter getAdapter() {
+        return this.adapter;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public Column[] getColumns() {
+        return this.columns;
     }
 }

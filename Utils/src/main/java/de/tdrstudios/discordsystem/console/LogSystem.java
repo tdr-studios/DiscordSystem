@@ -1,7 +1,5 @@
 package de.tdrstudios.discordsystem.console;
 
-import lombok.Getter;
-
 import java.io.PrintStream;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
@@ -13,7 +11,6 @@ import java.util.logging.Logger;
  * @since 0.1-ALPHA
  */
 public class LogSystem {
-    @Getter
     private Logger logger;
 
     public LogSystem(Logger logger) {
@@ -58,16 +55,12 @@ public class LogSystem {
 
     }
 
-    @Getter
     private PrintStream debug;
 
-    @Getter
     private PrintStream out;
 
-    @Getter
     private PrintStream warning;
 
-    @Getter
     private PrintStream error;
 
     private PrintStream create(Level level) {
@@ -77,5 +70,25 @@ public class LogSystem {
                 logger.log(level, s);
             }
         }), true);
+    }
+
+    public Logger getLogger() {
+        return this.logger;
+    }
+
+    public PrintStream getDebug() {
+        return this.debug;
+    }
+
+    public PrintStream getOut() {
+        return this.out;
+    }
+
+    public PrintStream getWarning() {
+        return this.warning;
+    }
+
+    public PrintStream getError() {
+        return this.error;
     }
 }

@@ -1,16 +1,19 @@
 package de.dseelp.database.api.storage;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-
 /**
  * @author DSeeLP
  * @since 0.1-ALPHA
  */
-@AllArgsConstructor
-@NoArgsConstructor
 public class IntStorage implements StorageObject {
     private int i;
+
+    public IntStorage(int i) {
+        this.i = i;
+    }
+
+    public IntStorage() {
+    }
+
     @Override
     public Object get() {
         return i;

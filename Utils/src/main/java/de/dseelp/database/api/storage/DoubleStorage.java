@@ -1,16 +1,19 @@
 package de.dseelp.database.api.storage;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-
 /**
  * @author DSeeLP
  * @since 0.1-ALPHA
  */
-@AllArgsConstructor
-@NoArgsConstructor
 public class DoubleStorage implements StorageObject {
     private double d;
+
+    public DoubleStorage(double d) {
+        this.d = d;
+    }
+
+    public DoubleStorage() {
+    }
+
     @Override
     public Object get() {
         return d;

@@ -1,6 +1,5 @@
 package de.tdrstudios.discordsystem.api.services;
 
-import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -8,8 +7,15 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-@Getter
 public class ComparableService implements Comparable<ComparableService> {
+    public Service getService() {
+        return service;
+    }
+
+    public int getSorter() {
+        return sorter;
+    }
+
     private final Service service;
     private final int sorter;
 

@@ -1,7 +1,6 @@
 package de.tdrstudios.discordsystem.api.setup;
 
 import de.tdrstudios.discordsystem.utils.JsonDocument;
-import lombok.Getter;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.MessageChannel;
@@ -19,9 +18,7 @@ public abstract class Setup {
     public abstract void onComplete(JsonDocument document);
     public abstract void onCancel();
     public void initSetup() {}
-    @Getter
     private boolean privateChannel;
-    @Getter
     private long channelId;
     private JsonDocument data = new JsonDocument();
 
@@ -84,6 +81,10 @@ public abstract class Setup {
         nextStep();
     }
 
+    public void completeStep() {
+        nextStep();
+    }
+
     public void completeStep(Boolean data) {
         this.data.add(getCurrentStep().getIdentifier(), data);
         nextStep();
@@ -101,5 +102,13 @@ public abstract class Setup {
 
     public void addStep(SetupStep step) {
         steps.add(step);
+    }
+
+    public boolean isPrivateChannel() {
+        return this.privateChannel;
+    }
+
+    public long getChannelId() {
+        return this.channelId;
     }
 }

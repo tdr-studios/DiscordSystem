@@ -2,8 +2,6 @@ package de.tdrstudios.discordsystem.api.reactions;
 
 import de.tdrstudios.discordsystem.api.event.EventHandler;
 import de.tdrstudios.discordsystem.api.modules.Module;
-import lombok.Getter;
-import lombok.Setter;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
@@ -39,11 +37,20 @@ public class ReactionMenu {
         reactionActions.add(action);
     }
 
-    @Getter
-    @Setter
+    public MessageEmbed getCancelledMessage() {
+        return cancelledMessage;
+    }
+
+    public void setCancelledMessage(MessageEmbed cancelledMessage) {
+        this.cancelledMessage = cancelledMessage;
+    }
+
     private MessageEmbed cancelledMessage = new EmbedBuilder().setColor(Color.RED).setDescription("Cancelled").build();
 
-    @Getter
+    public Message getMessage() {
+        return message;
+    }
+
     private Message message;
 
     public void sendQueue(TextChannel channel) {

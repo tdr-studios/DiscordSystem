@@ -7,7 +7,6 @@ import de.tdrstudios.discordsystem.utils.JsonDocument;
 import de.tdrstudios.discordsystem.version.WebHelper;
 import de.tdrstudios.discordsystem.version.module.DownloadableModule;
 import de.tdrstudios.discordsystem.version.module.ModuleType;
-import lombok.Getter;
 import org.apache.maven.artifact.versioning.DefaultArtifactVersion;
 
 import java.util.ArrayList;
@@ -15,13 +14,10 @@ import java.util.List;
 
 
 public class ModuleRepository {
-    @Getter
     private List<DownloadableModule> modules;
 
-    @Getter
     private String name;
 
-    @Getter
     private ModuleRepositoryType type;
 
     public static ModuleRepository findRepository(WebHelper webHelper) {
@@ -67,5 +63,17 @@ public class ModuleRepository {
             module.setCoreVersion(coreVersion);
         }
         return this;
+    }
+
+    public List<DownloadableModule> getModules() {
+        return this.modules;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public ModuleRepositoryType getType() {
+        return this.type;
     }
 }

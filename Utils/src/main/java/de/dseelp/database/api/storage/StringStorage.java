@@ -1,16 +1,19 @@
 package de.dseelp.database.api.storage;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-
 /**
  * @author DSeeLP
  * @since 0.1-ALPHA
  */
-@AllArgsConstructor
-@NoArgsConstructor
 public class StringStorage implements StorageObject {
     private String s;
+
+    public StringStorage(String s) {
+        this.s = s;
+    }
+
+    public StringStorage() {
+    }
+
     @Override
     public Object get() {
         return s;

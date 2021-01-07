@@ -11,7 +11,6 @@ import de.tdrstudios.discordsystem.utils.ClassCriteria;
 import de.tdrstudios.discordsystem.utils.JsonConfig;
 import de.tdrstudios.discordsystem.utils.JsonDocument;
 import de.tdrstudios.discordsystem.utils.ReflectionUtils;
-import lombok.Getter;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,7 +29,10 @@ public class Discord implements Service {
         Discord.injector = injector;
     }
 
-    @Getter
+    public static Injector getInjector() {
+        return injector;
+    }
+
     private static Injector injector;
 
     public static <T> T getInstance(Class<T> clazz) {

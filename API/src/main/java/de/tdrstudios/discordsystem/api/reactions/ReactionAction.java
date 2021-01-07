@@ -1,18 +1,30 @@
 package de.tdrstudios.discordsystem.api.reactions;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import java.util.function.Consumer;
 
 /**
  * @author DSeeLP
  * @since 0.1-ALPHA
  */
-@Getter
-@Setter
 public class ReactionAction {
     private final String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Reaction getReaction() {
+        return reaction;
+    }
+
+    public Consumer<ReactionMenu> getSubmitAction() {
+        return submitAction;
+    }
+
     private final String description;
     private final Reaction reaction;
     private final Consumer<ReactionMenu> submitAction;
